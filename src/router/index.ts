@@ -4,6 +4,11 @@ const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
+			name: 'welcome',
+			path: '/',
+			component: () => import('@/views/Welcome.vue'),
+		},
+		{
 			path: '/auth',
 			component: () => import('@/views/auth/Auth.vue'),
 			children: [
@@ -18,6 +23,10 @@ const router = createRouter({
 					component: () => import('@/views/auth/Register.vue'),
 				},
 			],
+		},
+		{
+			path: '/:wte(.*)*',
+			component: () => import('@/views/errors/404.vue'),
 		},
 	],
 })
