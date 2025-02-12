@@ -1,21 +1,22 @@
 import useHttp from '@/compose/http'
+import type User from '@/types/auth'
 import type { AxiosResponse } from 'axios'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useAuth = defineStore('auth', () => {
-	const token = ref(localStorage.getItem('auth:token'))
-	const user = ref()
+export const useAuthStore = defineStore('auth', () => {
+	const user = ref<User | null>()
+	const authenticated = ref(false)
 
 	const logout = () => {
 		localStorage.removeItem('auth:token')
 		sessionStorage.removeItem('auth:user')
-		token.value = null
 		user.value = null
 	}
 
 	const reload = async () => {
 		try {
+			const token = localStorage.getItem('auth:token')
 			user.value = JSON.parse(<string>sessionStorage.getItem('auth:user'))
 
 			if (!user.value) {
@@ -23,7 +24,7 @@ export const useAuth = defineStore('auth', () => {
 					url: 'auth/me',
 					method: 'post',
 					headers: {
-						Authorization: `Bearer ${token.value}`,
+						Authorization: `Bearer ${token}`,
 					},
 				})
 
@@ -33,21 +34,23 @@ export const useAuth = defineStore('auth', () => {
 				}
 			}
 		} catch (e) {
-			user.value = undefined
+			user.value = null
+			console.error(e)
 		}
+
+		authenticated.value = !!user
 	}
 
 	const setToken = (t: string) => {
 		logout()
-		token.value = t
 		localStorage.setItem('auth:token', t)
 		reload()
 	}
 
 	return {
-		token,
 		user,
 		setToken,
 		reload,
+		authenticated,
 	}
 })

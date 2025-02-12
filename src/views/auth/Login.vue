@@ -2,7 +2,7 @@
 import { ref, toValue } from 'vue'
 import useHttp from '../../compose/http'
 import Input from '../../components/Input.vue'
-import { useAuth } from '../../stores/auth'
+import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
 
 const form = ref({
@@ -22,7 +22,7 @@ function register() {
 			data: toValue(form),
 		},
 		onSuccess({ data }) {
-			useAuth().setToken(data.token)
+			useAuthStore().setToken(data.token)
 			router.push({ name: 'home' })
 		},
 	})

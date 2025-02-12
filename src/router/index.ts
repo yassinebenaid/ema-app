@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuth } from '../stores/auth'
+import { useAuthStore } from '../stores/auth'
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -39,14 +39,14 @@ const router = createRouter({
 })
 
 router.beforeEach(to => {
-	const auth = useAuth()
+	const auth = useAuthStore()
 	auth.reload()
 
-	if (to.meta.guest && auth.user) {
+	if (to.meta.guest && auth.authenticated) {
 		return { name: 'home' }
 	}
 
-	if (!to.meta.guest && !auth.user) {
+	if (!to.meta.guest && !auth.authenticated) {
 		return { name: 'login' }
 	}
 })
