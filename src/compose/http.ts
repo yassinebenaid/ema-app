@@ -18,7 +18,7 @@ export default function useHttp() {
 
 		instance(options.config)
 			.then(res => {
-				if (options.onSuccess) {
+				if (options.onSuccess && res.data.success) {
 					options.onSuccess(res.data)
 				}
 				errors.value = res.data?.errors
