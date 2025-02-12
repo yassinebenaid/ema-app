@@ -2,6 +2,8 @@
 import { ref, toValue } from 'vue'
 import useHttp from '../../compose/http'
 import Input from '../../components/Input.vue'
+import { useAuth } from '../../stores/auth'
+import { useRouter } from 'vue-router'
 
 const form = ref({
 	name: null,
@@ -9,13 +11,20 @@ const form = ref({
 	password: null,
 })
 
+const router = useRouter()
 const { loading, errors, execute } = useHttp()
 
 function register() {
 	execute({
-		url: 'auth/register',
-		method: 'post',
-		data: toValue(form),
+		config: {
+			url: 'auth/register',
+			method: 'post',
+			data: toValue(form),
+		},
+		onSuccess({ data }) {
+			useAuth().setToken(data.token)
+			router.push({ name: 'home' })
+		},
 	})
 }
 </script>

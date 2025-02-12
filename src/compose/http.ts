@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import { ref } from 'vue'
 
@@ -13,11 +13,14 @@ export default function useHttp() {
 	const loading = ref(false)
 	const errors = ref([])
 
-	const execute = (config: AxiosRequestConfig) => {
+	const execute = (options: { config: AxiosRequestConfig; onSuccess?: (res: AxiosResponse) => void }) => {
 		loading.value = true
 
-		instance(config)
+		instance(options.config)
 			.then(res => {
+				if (options.onSuccess) {
+					options.onSuccess(res.data)
+				}
 				errors.value = res.data?.errors
 			})
 			.finally(() => {

@@ -7,6 +7,7 @@ const props = defineProps<{
 	type?: 'text' | 'email' | 'password'
 	error?: string
 	autocomplete?: string
+	modelValue: null
 }>()
 
 const id =
@@ -19,6 +20,8 @@ const id =
 			{{ label }} <span v-if="required" class="text-orange-500">*</span>
 		</label>
 		<input
+			:value="modelValue"
+			@input=" (e: any) => $emit('update:modelValue',e.target.value)"
 			:id="id"
 			:placeholder="placeholder"
 			:type="type ?? 'text'"
