@@ -11,6 +11,7 @@ const form = ref({
 	password: null,
 })
 
+const auth = useAuthStore()
 const router = useRouter()
 const { loading, errors, execute } = useHttp()
 
@@ -22,8 +23,8 @@ function register() {
 			data: toValue(form),
 		},
 		onSuccess({ data }) {
-			useAuthStore().setToken(data.token)
-			router.push({ name: 'home' })
+			auth.setToken(data.token)
+			auth.reload().then(() => router.push({ name: 'home' }))
 		},
 	})
 }

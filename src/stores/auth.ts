@@ -41,7 +41,6 @@ export const useAuthStore = defineStore('auth', () => {
 	const setToken = (t: string) => {
 		logout()
 		localStorage.setItem('auth:token', t)
-		reload()
 	}
 
 	const isLoggedIn = (): boolean => {
