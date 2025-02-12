@@ -39,10 +39,12 @@ const router = createRouter({
 	],
 })
 
-router.beforeEach(to => {
+router.beforeEach(async to => {
 	if (to.meta.public) {
 		return true
 	}
+
+	await useAuthStore().reload()
 
 	if (to.meta.guest && useAuthStore().isLoggedIn()) {
 		return { name: 'home' }

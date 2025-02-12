@@ -44,7 +44,6 @@ export const useAuthStore = defineStore('auth', () => {
 	}
 
 	const isLoggedIn = (): boolean => {
-		reload()
 		return !!user.value
 	}
 
