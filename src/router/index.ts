@@ -7,8 +7,8 @@ const router = createRouter({
 		{
 			name: 'home',
 			path: '/home',
-			component: () => import('@/views/Home.vue'),
-			beforeEnter(to, from) {
+			component: () => import('@/views/Home/Main.vue'),
+			beforeEnter() {
 				if (!useAuth().authenticated) {
 					return { name: 'login' }
 				}
