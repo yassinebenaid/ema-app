@@ -15,6 +15,75 @@ const logout = () => {
 	<aside class="bg-stone-50 border-r border-stone-200 w-80 flex flex-col justify-between">
 		<RouterLink :to="{ name: 'welcome' }" class="text-2xl open-sans-brand p-2"> Wanna </RouterLink>
 
+		<ul class="flex-1 flex flex-col gap-1 p-3 text-sm text-primary/70 font-medium">
+			<li>
+				<RouterLink
+					:to="{ name: 'home' }"
+					class="flex active:bg-stone-200 hover:bg-stone-200/50 items-center gap-2 p-2 rounded-lg"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						fill="currentColor"
+						class="bi bi-collection"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5z"
+						/>
+					</svg>
+					Events
+				</RouterLink>
+			</li>
+			<li>
+				<RouterLink
+					:to="{ name: 'login' }"
+					class="flex active:bg-stone-200 hover:bg-stone-200/50 items-center gap-2 p-2 rounded-lg"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						fill="currentColor"
+						class="bi bi-bookmarks"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1z"
+						/>
+						<path
+							d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1"
+						/>
+					</svg>
+					My List
+				</RouterLink>
+			</li>
+			<li>
+				<RouterLink
+					:to="{ name: 'login' }"
+					class="flex active:bg-stone-200 hover:bg-stone-200/50 items-center gap-2 p-2 rounded-lg"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						fill="currentColor"
+						class="bi bi-calendar-week"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"
+						/>
+						<path
+							d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
+						/>
+					</svg>
+					Calendar
+				</RouterLink>
+			</li>
+		</ul>
+
 		<div class="border-t flex items-center justify-between">
 			<div class="flex p-3 items-center gap-2">
 				<div>

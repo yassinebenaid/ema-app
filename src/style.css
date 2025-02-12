@@ -17,3 +17,7 @@
 .btn-secondary {
 	@apply block py-2 px-4 text-center text-primary font-medium bg-primary/10 duration-150 hover:bg-primary/20 active:bg-primary/30 rounded-lg;
 }
+
+.router-link-active {
+	@apply bg-stone-200/50 text-primary;
+}
