@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import { ref, toValue } from 'vue'
+import useHttp from '../../compose/http'
+
+const form = ref({
+	name: null,
+	email: null,
+	password: null,
+})
+
+function register() {
+	useHttp({
+		url: 'auth/register',
+		method: 'post',
+		data: toValue(form),
+	})
+}
+</script>
+
 <template>
 	<div class="flex-1 flex items-center justify-center h-screen">
 		<div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
@@ -14,10 +33,11 @@
 				</div>
 			</div>
 
-			<form class="space-y-5">
+			<form @submit.prevent="register" class="space-y-5">
 				<div>
 					<label class="font-medium">Name</label>
 					<input
+						v-model="form.name"
 						type="text"
 						required
 						class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
@@ -26,6 +46,7 @@
 				<div>
 					<label class="font-medium">Email</label>
 					<input
+						v-model="form.email"
 						type="email"
 						required
 						class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
@@ -34,6 +55,7 @@
 				<div>
 					<label class="font-medium">Password</label>
 					<input
+						v-model="form.password"
 						type="password"
 						required
 						class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
