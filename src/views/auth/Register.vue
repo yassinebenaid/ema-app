@@ -21,7 +21,7 @@ function register() {
 	<div class="flex-1 flex items-center justify-center h-screen">
 		<div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
 			<div class="">
-				<img src="https://floatui.com/logo.svg" width="150" class="lg:hidden" />
+				<RouterLink :to="{ name: 'welcome' }" class="text-3xl lg:hidden open-sans-brand"> Wanna </RouterLink>
 				<div class="mt-5 space-y-2">
 					<h3 class="text-gray-800 text-2xl font-bold sm:text-3xl">Register</h3>
 					<p class="">
