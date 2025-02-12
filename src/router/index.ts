@@ -8,11 +8,6 @@ const router = createRouter({
 			name: 'home',
 			path: '/home',
 			component: () => import('@/views/Home/Main.vue'),
-			beforeEnter() {
-				if (!useAuth().authenticated) {
-					return { name: 'login' }
-				}
-			},
 		},
 		{
 			name: 'welcome',
@@ -22,6 +17,7 @@ const router = createRouter({
 		{
 			path: '/auth',
 			component: () => import('@/views/auth/Auth.vue'),
+			meta: { guest: true },
 			children: [
 				{
 					name: 'login',
@@ -40,6 +36,19 @@ const router = createRouter({
 			component: () => import('@/views/errors/404.vue'),
 		},
 	],
+})
+
+router.beforeEach(to => {
+	const auth = useAuth()
+	auth.reload()
+
+	if (to.meta.guest && auth.user) {
+		return { name: 'home' }
+	}
+
+	if (!to.meta.guest && !auth.user) {
+		return { name: 'login' }
+	}
 })
 
 export default router
