@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuth } from '../stores/auth'
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -7,6 +8,11 @@ const router = createRouter({
 			name: 'home',
 			path: '/home',
 			component: () => import('@/views/Home.vue'),
+			beforeEnter(to, from) {
+				if (!useAuth().authenticated) {
+					return { name: 'login' }
+				}
+			},
 		},
 		{
 			name: 'welcome',
