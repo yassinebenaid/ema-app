@@ -37,7 +37,7 @@
 			class="flex-1 justify-end mt-12 md:text-sm md:font-medium md:flex md:mt-0"
 		>
 			<li class="order-2 py-5 md:py-0">
-				<RouterLink :to="{ name: 'login' }" class="btn-secondary"> Get started </RouterLink>
+				<RouterLink :to="{ name: 'home' }" class="btn-secondary"> Get started </RouterLink>
 			</li>
 		</ul>
 	</nav>
@@ -55,7 +55,7 @@
 				</p>
 				<div class="items-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
 					<RouterLink
-						:to="{ name: 'login' }"
+						:to="{ name: 'home' }"
 						class="block py-2 px-4 text-center text-white font-medium bg-primary duration-150 hover:opacity-90 active:opacity-80 rounded-lg shadow-lg hover:shadow-none"
 					>
 						Let's get started
@@ -154,7 +154,7 @@
 					<RouterLink :to="{ name: 'welcome' }" class="text-3xl open-sans-brand"> Wanna </RouterLink>
 					<p>Your all in one event management plaform.</p>
 					<div class="items-center gap-x-3 space-y-3 sm:flex sm:justify-center sm:space-y-0">
-						<RouterLink :to="{ name: 'login' }" class="btn-primary"> Let's get started </RouterLink>
+						<RouterLink :to="{ name: 'home' }" class="btn-primary"> Let's get started </RouterLink>
 					</div>
 				</div>
 				<div class="mt-10 py-10 border-t items-center justify-center sm:flex">

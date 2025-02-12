@@ -13,6 +13,7 @@ const router = createRouter({
 			name: 'welcome',
 			path: '/',
 			component: () => import('@/views/Welcome.vue'),
+			meta: { public: true },
 		},
 		{
 			path: '/auth',
@@ -39,14 +40,15 @@ const router = createRouter({
 })
 
 router.beforeEach(to => {
-	const auth = useAuthStore()
-	auth.reload()
+	if (to.meta.public) {
+		return true
+	}
 
-	if (to.meta.guest && auth.authenticated) {
+	if (to.meta.guest && useAuthStore().isLoggedIn()) {
 		return { name: 'home' }
 	}
 
-	if (!to.meta.guest && !auth.authenticated) {
+	if (!to.meta.guest && !useAuthStore().isLoggedIn()) {
 		return { name: 'login' }
 	}
 })

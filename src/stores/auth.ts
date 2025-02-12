@@ -6,7 +6,6 @@ import { ref } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
 	const user = ref<User | null>()
-	const authenticated = ref(false)
 
 	const logout = () => {
 		localStorage.removeItem('auth:token')
@@ -37,8 +36,6 @@ export const useAuthStore = defineStore('auth', () => {
 			user.value = null
 			console.error(e)
 		}
-
-		authenticated.value = !!user
 	}
 
 	const setToken = (t: string) => {
@@ -47,10 +44,15 @@ export const useAuthStore = defineStore('auth', () => {
 		reload()
 	}
 
+	const isLoggedIn = (): boolean => {
+		reload()
+		return !!user.value
+	}
+
 	return {
 		user,
 		setToken,
 		reload,
-		authenticated,
+		isLoggedIn,
 	}
 })
