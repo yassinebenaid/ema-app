@@ -37,12 +37,7 @@
 			class="flex-1 justify-end mt-12 md:text-sm md:font-medium md:flex md:mt-0"
 		>
 			<li class="order-2 py-5 md:py-0">
-				<RouterLink
-					:to="{ name: 'login' }"
-					class="py-2 px-5 rounded-lg font-bold text-center text-indigo-600 hover:bg-gray-100 active:bg-gray-200 duration-150 block md:py-3 md:inline"
-				>
-					Get started
-				</RouterLink>
+				<RouterLink :to="{ name: 'login' }" class="btn-secondary"> Get started </RouterLink>
 			</li>
 		</ul>
 	</nav>
@@ -61,7 +56,7 @@
 				<div class="items-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
 					<RouterLink
 						:to="{ name: 'login' }"
-						class="block py-2 px-4 text-center text-white font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none"
+						class="block py-2 px-4 text-center text-white font-medium bg-primary duration-150 hover:opacity-90 active:opacity-80 rounded-lg shadow-lg hover:shadow-none"
 					>
 						Let's get started
 					</RouterLink>
@@ -85,7 +80,7 @@
 				<ul class="grid gap-y-8 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
 					<li class="space-y-3">
 						<div
-							class="w-12 h-12 mx-auto bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center"
+							class="w-12 h-12 mx-auto bg-primary/10 text-primary rounded-full flex items-center justify-center"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +103,7 @@
 					</li>
 					<li class="space-y-3">
 						<div
-							class="w-12 h-12 mx-auto bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center"
+							class="w-12 h-12 mx-auto bg-primary/10 text-primary rounded-full flex items-center justify-center"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +123,7 @@
 					</li>
 					<li class="space-y-3">
 						<div
-							class="w-12 h-12 mx-auto bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center"
+							class="w-12 h-12 mx-auto bg-primary/10 text-primary rounded-full flex items-center justify-center"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -159,12 +154,7 @@
 					<RouterLink :to="{ name: 'welcome' }" class="text-3xl open-sans-brand"> Wanna </RouterLink>
 					<p>Your all in one event management plaform.</p>
 					<div class="items-center gap-x-3 space-y-3 sm:flex sm:justify-center sm:space-y-0">
-						<RouterLink
-							:to="{ name: 'login' }"
-							class="block py-2 px-4 text-center text-white font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none"
-						>
-							Let's get started
-						</RouterLink>
+						<RouterLink :to="{ name: 'login' }" class="btn-primary"> Let's get started </RouterLink>
 					</div>
 				</div>
 				<div class="mt-10 py-10 border-t items-center justify-center sm:flex">

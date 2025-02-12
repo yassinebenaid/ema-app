@@ -38,7 +38,7 @@ function register() {
 					<h3 class="text-gray-800 text-2xl font-bold sm:text-3xl">Register</h3>
 					<p class="">
 						Already have an account?
-						<RouterLink :to="{ name: 'login' }" class="font-medium text-indigo-600 hover:text-indigo-500">
+						<RouterLink :to="{ name: 'login' }" class="font-medium text-primary hover:underline">
 							Log in
 						</RouterLink>
 					</p>
@@ -73,12 +73,7 @@ function register() {
 					required
 				/>
 
-				<button
-					:disabled="loading"
-					class="w-full disabled:bg-indigo-300 transition-all border border-transparent disabled:text-indigo-500 disabled:border-indigo-500 px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
-				>
-					Create account
-				</button>
+				<button :disabled="loading" class="btn-primary w-full">Create account</button>
 			</form>
 
 			<ul class="text-sm text-red-500">
