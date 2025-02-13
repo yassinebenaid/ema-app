@@ -56,14 +56,14 @@ const isModalOpen = ref(false)
 							</button>
 						</div>
 
-						<div class="flex-1 flex flex-col gap-2 p-3">
+						<div class="flex-1 flex flex-col gap-1 p-3">
 							<input
 								type="text"
 								class="w-full p-2 outline-none focus:bg-stone-50 rounded-lg border border-transparent hover:bg-stone-50 translate-full"
 								placeholder="Event Title ..."
 							/>
 
-							<div class="grid grid-cols-2 gap-2">
+							<div class="grid grid-cols-2">
 								<div
 									class="flex items-center gap-2 text-sm text-gray-400 hover:bg-stone-100 cursor-pointer transition-all p-2 rounded-lg"
 								>
