@@ -2,10 +2,26 @@
 import PathBar from '@/components/PathBar.vue'
 
 import { useAuthStore } from '@/stores/auth'
+import { useScroll } from '@vueuse/core'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const auth = useAuthStore()
 const router = useRouter()
+
+const container = ref<HTMLDivElement>()
+const { y } = useScroll(container, {
+	behavior: 'smooth',
+	throttle: 100,
+})
+
+function scrollUp() {
+	container.value?.scrollTo({
+		behavior: 'smooth',
+		top: 0,
+		left: 0,
+	})
+}
 
 const logout = () => {
 	auth.logout()
@@ -128,14 +144,37 @@ const logout = () => {
 			</div>
 		</aside>
 
-		<main class="w-full flex flex-col gap-2 p-3">
-			<header>
+		<main ref="container" class="w-full flex flex-col gap-2 p-3 overflow-x-hidden overflow-y-auto relative">
+			<header class="stick top-0">
 				<PathBar :segments="['Events']" />
 			</header>
 
 			<div>
 				<slot />
 			</div>
+			<div class="grid select-none place-items-center py-10">
+				<div class="open-sans-brand text-lg text-gray-500">Wanna</div>
+			</div>
+
+			<Transition>
+				<button
+					v-show="y > 400"
+					@click="scrollUp"
+					class="fixed border active:bg-stone-50 transition-all hover:bg-stone-100 text-gray-500 bottom-10 right-10 bg-white p-2 rounded-full shadow"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="size-6"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 18.75 7.5-7.5 7.5 7.5" />
+						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 7.5-7.5 7.5 7.5" />
+					</svg>
+				</button>
+			</Transition>
 		</main>
 	</div>
 </template>
