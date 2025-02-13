@@ -6,6 +6,7 @@ import { ref } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
 	const user = ref<User | null>()
+	const token = ref<string | null>()
 
 	const logout = () => {
 		localStorage.removeItem('auth:token')
@@ -15,7 +16,7 @@ export const useAuthStore = defineStore('auth', () => {
 
 	const reload = async () => {
 		try {
-			const token = localStorage.getItem('auth:token')
+			token.value = localStorage.getItem('auth:token')
 			user.value = JSON.parse(<string>sessionStorage.getItem('auth:user'))
 
 			if (!user.value) {
@@ -23,7 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
 					url: 'auth/me',
 					method: 'post',
 					headers: {
-						Authorization: `Bearer ${token}`,
+						Authorization: `Bearer ${token.value}`,
 					},
 				})
 
@@ -49,6 +50,7 @@ export const useAuthStore = defineStore('auth', () => {
 
 	return {
 		user,
+		token,
 		setToken,
 		reload,
 		isLoggedIn,

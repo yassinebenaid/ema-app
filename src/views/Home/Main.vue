@@ -1,5 +1,33 @@
 <script setup lang="ts">
+import useHttp from '@/compose/http'
 import Layout from '../Layout.vue'
+import { onMounted, ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import type { Event } from '@/types/event'
+
+const events = ref<Event[]>([])
+
+const { execute } = useHttp()
+
+const load = () => {
+	execute({
+		config: {
+			url: 'events',
+			method: 'get',
+			headers: {
+				Authorization: `Bearer ${useAuthStore().token}`,
+			},
+			params: {
+				per_page: 18,
+			},
+		},
+		onSuccess({ data }) {
+			events.value = data.items
+		},
+	})
+}
+
+onMounted(load)
 </script>
 
 <template>
@@ -7,7 +35,7 @@ import Layout from '../Layout.vue'
 		<div class="flex items-center justify-between">
 			<h1 class="text-2xl font-bold">Events</h1>
 			<div>
-				<button class="text-xs flex items-center gap-2 bg-primary text-white p-2 rounded-md">
+				<button class="text-xs flex items-center gap-2 bg-primary text-white p-2 px-3 rounded-md">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -23,13 +51,13 @@ import Layout from '../Layout.vue'
 			</div>
 		</div>
 
-		<div class="grid grid-cols-3 mt-10 gap-2">
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-10 gap-2">
 			<div
-				v-for="(item, index) in 12"
-				:key="index"
+				v-for="event in events"
+				:key="event.id"
 				class="flex flex-col gap-2 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] rounded-md p-3"
 			>
-				<div class="text-sm">Analyse proposals and figure out what's next</div>
+				<div class="text-sm">{{ event.title }}</div>
 				<div class="flex items-center gap-2">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +74,7 @@ import Layout from '../Layout.vue'
 						/>
 					</svg>
 
-					<span class="text-xs text-gray-500"> 2025 May 10, 12:00 </span>
+					<span class="text-xs text-gray-500">{{ event.date }}</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<svg
@@ -65,7 +93,7 @@ import Layout from '../Layout.vue'
 						/>
 					</svg>
 
-					<span class="text-xs text-gray-500"> Technopark, Casablanca </span>
+					<span class="text-xs text-gray-500"> {{ event.location }}</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<svg
@@ -88,7 +116,7 @@ import Layout from '../Layout.vue'
 							src="https://randomuser.me/api/portraits/women/79.jpg"
 							class="size-6 rounded-full border-2 border-white"
 						/>
-						<p class="text-xs text-gray-400 pl-3">Yassine Benaid</p>
+						<p class="text-xs text-gray-400 pl-3">{{ event.user.name }}</p>
 					</div>
 				</div>
 				<div class="flex items-center gap-2">
