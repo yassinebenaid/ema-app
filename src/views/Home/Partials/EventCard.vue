@@ -69,7 +69,7 @@ defineProps<{
 					src="https://randomuser.me/api/portraits/women/79.jpg"
 					class="size-6 rounded-full border-2 border-white"
 				/>
-				<p class="text-xs text-gray-400 pl-3">{{ event.user.name }}</p>
+				<p class="text-xs text-gray-500 pl-3">{{ event.user.name }}</p>
 			</div>
 		</div>
 		<div class="flex items-center gap-2">
@@ -105,7 +105,7 @@ defineProps<{
 					src="https://randomuser.me/api/portraits/men/86.jpg"
 					class="size-6 rounded-full border-2 border-white"
 				/>
-				<p class="text-xs text-gray-400 pl-3">+5K attendees</p>
+				<p class="text-xs text-gray-500 pl-3">+5K attendees</p>
 			</div>
 		</div>
 	</div>
