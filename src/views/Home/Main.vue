@@ -1,38 +1,5 @@
 <script setup lang="ts">
 import Layout from '../Layout.vue'
-
-const tableItems = [
-	{
-		name: 'Solo learn app',
-		date: 'Oct 9, 2023',
-		status: 'Active',
-		plan: 'Monthly subscription',
-	},
-	{
-		name: 'Window wrapper',
-		date: 'Oct 12, 2023',
-		status: 'Active',
-		plan: 'Monthly subscription',
-	},
-	{
-		name: 'Unity loroin',
-		date: 'Oct 22, 2023',
-		status: 'Archived',
-		plan: 'Annually subscription',
-	},
-	{
-		name: 'Background remover',
-		date: 'Jan 5, 2023',
-		status: 'Active',
-		plan: 'Monthly subscription',
-	},
-	{
-		name: 'Colon tiger',
-		date: 'Jan 6, 2023',
-		status: 'Active',
-		plan: 'Annually subscription',
-	},
-]
 </script>
 
 <template>
@@ -56,41 +23,50 @@ const tableItems = [
 			</div>
 		</div>
 
-		<div class="max-w-screen-xl mx-auto">
-			<div class="mt-8 rounded relative h-max overflow-auto">
-				<table class="w-full table-auto text-sm text-left">
-					<thead class="text-gray-600 bg-stone-50 text-xs font-medium border-b">
-						<tr>
-							<th class="p-2">Title</th>
-							<th class="p-2">Date</th>
-							<th class="p-2">Attendees</th>
-							<th class="p-2">Location</th>
-							<th class="p-2"></th>
-						</tr>
-					</thead>
-					<tbody class="text-gray-600 divide-y">
-						<tr v-for="(item, idx) in tableItems" :key="idx">
-							<td class="pr-6 py-4 whitespace-nowrap">{{ item.name }}</td>
-							<td class="pr-6 py-4 whitespace-nowrap">{{ item.date }}</td>
-							<td class="pr-6 py-4 whitespace-nowrap">
-								<span
-									:class="`px-3 py-2 rounded-full font-semibold text-xs ${
-										item.status === 'Active' ? 'text-green-600 bg-green-50' : 'text-blue-600 bg-blue-50'
-									}`"
-									>{{ item.status }}</span
-								>
-							</td>
-							<td class="pr-6 py-4 whitespace-nowrap">{{ item.plan }}</td>
-							<td class="text-right whitespace-nowrap">
-								<a
-									href="javascript:void(0)"
-									class="py-1.5 px-3 text-gray-600 hover:text-gray-500 duration-150 hover:bg-gray-50 border rounded-lg"
-									>Manage</a
-								>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+		<div class="grid grid-cols-3 mt-10 gap-2">
+			<div
+				v-for="(item, index) in 12"
+				:key="index"
+				class="flex flex-col gap-2 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] rounded-md p-3"
+			>
+				<div class="text-sm">Analyse proposals and figure out what's next</div>
+				<div class="flex items-center gap-2">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="size-4 text-gray-400"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"
+						/>
+					</svg>
+
+					<span class="text-xs text-gray-500"> 2025 May 10, 12:00 </span>
+				</div>
+				<div class="flex items-center gap-2">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="size-4 text-gray-400"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+						/>
+					</svg>
+
+					<span class="text-xs text-gray-500"> Technopark, Casablanca </span>
+				</div>
 			</div>
 		</div>
 	</Layout>
