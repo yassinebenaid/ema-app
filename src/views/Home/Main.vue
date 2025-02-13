@@ -9,6 +9,7 @@ import EventCardLoading from './Partials/EventCardLoading.vue'
 import Filters from './Partials/Filters.vue'
 import { useElementVisibility } from '@vueuse/core'
 import type { Pagination } from '@/types/general'
+import NewTask from './Partials/NewTask.vue'
 
 const events = ref<Event[]>([])
 const pagination = ref<Pagination>()
@@ -55,19 +56,7 @@ watch(lazyLoadingElementIsVisible, () => {
 		<div class="flex items-center justify-between">
 			<h1 class="text-2xl font-bold">Events</h1>
 			<div>
-				<button class="text-xs flex items-center gap-2 bg-primary text-white p-2 px-3 rounded-md">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="size-4"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-					</svg>
-					Add event
-				</button>
+				<NewTask />
 			</div>
 		</div>
 
