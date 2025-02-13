@@ -6,6 +6,7 @@ import { useAuthStore } from '@/stores/auth'
 import type { Event } from '@/types/event'
 import EventCard from './Partials/EventCard.vue'
 import EventCardLoading from './Partials/EventCardLoading.vue'
+import Filters from './Partials/Filters.vue'
 
 const events = ref<Event[]>([])
 
@@ -53,7 +54,11 @@ onMounted(load)
 			</div>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-10 gap-2">
+		<div class="py-5">
+			<Filters />
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
 			<template v-if="loading && !events.length">
 				<EventCardLoading v-for="i in 9" :key="i" />
 			</template>
