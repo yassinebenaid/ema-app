@@ -7,9 +7,9 @@ defineProps<{
 </script>
 
 <template>
-	<div
-		role="button"
-		class="flex flex-col gap-2 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] rounded-md p-3"
+	<RouterLink
+		:to="{ name: 'events.view', params: { event: event.id } }"
+		class="flex hover:border-primary/50 border border-transparent flex-col gap-2 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] rounded-md p-3"
 	>
 		<div class="text-sm">{{ event.title }}</div>
 		<div class="flex items-center gap-2">
@@ -109,5 +109,5 @@ defineProps<{
 				<p class="text-xs text-gray-500 pl-3">+5K attendees</p>
 			</div>
 		</div>
-	</div>
+	</RouterLink>
 </template>

@@ -7,7 +7,12 @@ const router = createRouter({
 		{
 			name: 'home',
 			path: '/home',
-			component: () => import('@/views/home/Main.vue'),
+			component: () => import('@/views/events/Main.vue'),
+		},
+		{
+			name: 'events.view',
+			path: '/events/:event(\\d+)',
+			component: () => import('@/views/events/View.vue'),
 		},
 		{
 			name: 'welcome',

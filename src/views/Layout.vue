@@ -152,7 +152,7 @@ const logout = () => {
 			<div>
 				<slot />
 			</div>
-			<div class="grid select-none place-items-center py-10">
+			<div class="grid sticky top-full select-none place-items-center py-10">
 				<div class="open-sans-brand text-lg text-gray-500">Wanna</div>
 			</div>
 
