@@ -26,6 +26,8 @@ export default function useHttp(config?: AxiosRequestConfig) {
 	const execute = (options: { config: AxiosRequestConfig; onSuccess?: (res: AxiosResponse) => void }) => {
 		loading.value = true
 
+		options.config.headers!['Accept-Language'] = 'en'
+
 		instance(options.config)
 			.then(res => {
 				if (options.onSuccess && res.data.success) {

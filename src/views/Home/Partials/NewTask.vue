@@ -1,24 +1,59 @@
 <script setup lang="ts">
+import useHttp from '@/compose/http'
+import { useAuthStore } from '@/stores/auth'
+import type { Event } from '@/types/event'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import moment from 'moment'
-import { ref, watch } from 'vue'
+import { ref, toValue, watch } from 'vue'
+
+const emit = defineEmits<{
+	(e: 'create', value: Event): void
+}>()
 
 const isModalOpen = ref(false)
 const form = ref({
 	title: '',
 	date: '',
 	location: '',
+	description: '',
+	max_attendees_count: undefined,
 })
 
-watch(form, () => {
-	console.log(form)
-})
+const reset = () => {
+	isModalOpen.value = false
+	form.value = {
+		title: '',
+		date: '',
+		location: '',
+		description: '',
+		max_attendees_count: undefined,
+	}
+}
+
+const { execute, loading, errors } = useHttp()
+
+const save = () => {
+	execute({
+		config: {
+			url: 'events',
+			method: 'post',
+			headers: {
+				Authorization: `Bearer ${useAuthStore().token}`,
+			},
+			data: toValue(form),
+		},
+		onSuccess({ data }) {
+			emit('create', data.item)
+			reset()
+		},
+	})
+}
 </script>
 
 <template>
 	<div>
 		<button
-			@click="isModalOpen = true"
+			@click.prevent="isModalOpen = true"
 			class="text-xs flex items-center gap-2 bg-primary text-white p-2 px-3 rounded-md"
 		>
 			<svg
@@ -44,14 +79,15 @@ watch(form, () => {
 				</Transition>
 
 				<Transition name="modal">
-					<div
+					<form
+						@submit.prevent="save"
 						v-if="isModalOpen"
 						class="bg-white origin-center divide-y flex flex-col rounded-xl top-[50%] min-h-96 -translate-x-[50%] -translate-y-[50%] w-[50rem] fixed left-[50%]"
 					>
 						<div class="py-1 px-3 flex items-center justify-between">
 							<div class="text-sm">New Event</div>
 							<button
-								@click="isModalOpen = false"
+								@click.prevent="reset"
 								class="hover:bg-slate-50 text-gray-500 p-2 rounded-lg active:bg-stone-100 transition-all"
 							>
 								<svg
@@ -123,6 +159,7 @@ watch(form, () => {
 										</svg>
 									</div>
 									<input
+										v-model="form.max_attendees_count"
 										type="number"
 										min="1"
 										class="w-full pl-9 rounded-lg p-2 outline-none hover:bg-stone-100 text-primary h-full"
@@ -154,6 +191,7 @@ watch(form, () => {
 										</svg>
 									</div>
 									<input
+										v-model="form.location"
 										type="text"
 										class="w-full pl-9 rounded-lg p-2 outline-none hover:bg-stone-100 text-primary h-full"
 										placeholder="Location"
@@ -186,13 +224,35 @@ watch(form, () => {
 								class="w-full text-sm p-2 h-40 outline-none rounded-lg border border-transparent resize-none translate-full"
 								placeholder="Event description ..."
 							></textarea>
+
+							<ul class="text-xs text-red-500">
+								<li v-for="(error, index) in errors" :key="index" class="flex items-center gap-2 p-0.5">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="14"
+										height="14"
+										fill="currentColor"
+										class="bi bi-exclamation-triangle"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"
+										/>
+										<path
+											d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"
+										/></svg
+									>{{ error }}
+								</li>
+							</ul>
 						</div>
 
 						<div class="p-3 flex justify-end gap-3 items-center">
-							<button @click="isModalOpen = false" class="btn-secondary !py-2 !text-xs">Cancel</button>
-							<button class="btn-primary !py-2 !text-xs">Save</button>
+							<button @click.prevent="reset" :disabled="loading" class="btn-secondary !py-2 !text-xs">
+								Cancel
+							</button>
+							<button type="submit" :disabled="loading" class="btn-primary !py-2 !text-xs">Save</button>
 						</div>
-					</div>
+					</form>
 				</Transition>
 			</div>
 		</Teleport>

@@ -56,7 +56,7 @@ watch(lazyLoadingElementIsVisible, () => {
 		<div class="flex items-center justify-between">
 			<h1 class="text-2xl font-bold">Events</h1>
 			<div>
-				<NewTask />
+				<NewTask @create="e => events.unshift(e)" />
 			</div>
 		</div>
 

@@ -77,7 +77,7 @@ function register() {
 				<button :disabled="loading" class="btn-primary w-full">Create account</button>
 			</form>
 
-			<ul class="text-sm text-red-500">
+			<ul class="text-xs text-red-500">
 				<li v-for="(error, index) in errors" :key="index" class="flex items-center gap-2 p-0.5">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
