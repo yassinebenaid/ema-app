@@ -21,3 +21,14 @@
 .router-link-active {
 	@apply bg-stone-200/50 text-primary;
 }
+
+input[type='number'] {
+	-moz-appearance: textfield; /* Firefox */
+	appearance: textfield; /* Chrome, Safari, Edge */
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
