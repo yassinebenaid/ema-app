@@ -144,15 +144,15 @@ const logout = () => {
 			</div>
 		</aside>
 
-		<main ref="container" class="w-full flex flex-col gap-2 p-3 overflow-x-hidden overflow-y-auto relative">
+		<main ref="container" class="w-full flex flex-col p-3 overflow-x-hidden overflow-y-auto relative">
 			<header class="stick top-0">
 				<PathBar :segments="['Events']" />
 			</header>
 
-			<div>
+			<div class="flex-1">
 				<slot />
 			</div>
-			<div class="grid sticky top-full select-none place-items-center py-10">
+			<div class="grid top-full select-none place-items-center py-10">
 				<div class="open-sans-brand text-lg text-gray-500">Wanna</div>
 			</div>
 

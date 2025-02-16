@@ -7,6 +7,7 @@ import { useAuthStore } from '@/stores/auth'
 import AttendeesList from './Partials/AttendeesList.vue'
 import { useRouter } from 'vue-router'
 import EventActions from './Partials/EventActions.vue'
+import Comments from './Partials/Comments.vue'
 
 const props = defineProps<{
 	eventId?: number | string
@@ -215,7 +216,8 @@ onMounted(load)
 				</div>
 			</div>
 			<div v-if="event" class="pt-3">
-				<AttendeesList :event="event" />
+				<AttendeesList v-if="tab == 'attendees'" :event="event" />
+				<Comments v-if="tab == 'comments'" :event="event" />
 			</div>
 		</template>
 	</Layout>
