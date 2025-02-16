@@ -40,6 +40,11 @@ const router = createRouter({
 		},
 		{
 			path: '/:wte(.*)*',
+			redirect: { name: '404' },
+		},
+		{
+			path: '/404',
+			name: '404',
 			component: () => import('@/views/errors/404.vue'),
 		},
 	],

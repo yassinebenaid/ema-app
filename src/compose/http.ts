@@ -12,7 +12,11 @@ export default function useHttp(config: AxiosRequestConfig): Promise<AxiosRespon
 export default function useHttp(): {
 	loading: Ref<boolean>
 	errors: Ref<string[]>
-	execute: (options: { config: AxiosRequestConfig; onSuccess?: (res: AxiosResponse) => void }) => void
+	execute: (options: {
+		config: AxiosRequestConfig
+		onSuccess?: (res: AxiosResponse) => void
+		onError?: (res: AxiosResponse) => void
+	}) => void
 }
 
 export default function useHttp(config?: AxiosRequestConfig) {
@@ -23,7 +27,11 @@ export default function useHttp(config?: AxiosRequestConfig) {
 	const loading = ref(false)
 	const errors = ref([])
 
-	const execute = (options: { config: AxiosRequestConfig; onSuccess?: (res: AxiosResponse) => void }) => {
+	const execute = (options: {
+		config: AxiosRequestConfig
+		onSuccess?: (res: AxiosResponse) => void
+		onError?: (res: AxiosResponse) => void
+	}) => {
 		loading.value = true
 
 		options.config.headers!['Accept-Language'] = 'en'
@@ -32,6 +40,9 @@ export default function useHttp(config?: AxiosRequestConfig) {
 			.then(res => {
 				if (options.onSuccess && res.data.success) {
 					options.onSuccess(res.data)
+				}
+				if (options.onError && !res.data.success) {
+					options.onError(res.data)
 				}
 				errors.value = res.data?.errors
 			})
