@@ -242,7 +242,7 @@ onMounted(load)
 					Comments
 				</div>
 			</div>
-			<div v-if="event">
+			<div v-if="event" class="pt-3">
 				<AttendeesList :event="event" />
 			</div>
 		</template>
