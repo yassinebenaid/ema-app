@@ -144,7 +144,7 @@ const logout = () => {
 			</div>
 		</aside>
 
-		<main ref="container" class="w-full flex flex-col p-3 overflow-x-hidden overflow-y-auto relative">
+		<main ref="container" class="w-full flex gap-3 flex-col p-3 overflow-x-hidden overflow-y-auto relative">
 			<header class="stick top-0">
 				<PathBar :segments="['Events']" />
 			</header>

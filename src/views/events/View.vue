@@ -98,9 +98,7 @@ onMounted(load)
 									{{ event?.maxAttendeesCount }}
 								</div>
 							</div>
-							<div
-								class="flex relative items-center gap-2 text-sm text-gray-400 cursor-pointer transition-all rounded-lg"
-							>
+							<div class="flex relative items-center gap-2 text-sm text-gray-400 transition-all rounded-lg">
 								<div>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -124,15 +122,13 @@ onMounted(load)
 								</div>
 								<div
 									type="text"
-									class="w-full rounded-lg outline-none hover:bg-stone-100 text-primary h-full"
+									class="w-full rounded-lg outline-none text-primary h-full"
 									placeholder="Location"
 								>
 									{{ event?.location }}
 								</div>
 							</div>
-							<div
-								class="flex items-center gap-2 text-xs text-gray-400 hover:bg-stone-100 cursor-pointer transition-all rounded-lg"
-							>
+							<div class="flex items-center gap-2 text-xs text-gray-400 transition-all rounded-lg">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
