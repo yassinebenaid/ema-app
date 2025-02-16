@@ -8,4 +8,6 @@ export interface Event {
 	description: string
 	location: string
 	user: User
+	attendees?: User[]
+	userIsAttendee?: boolean
 }

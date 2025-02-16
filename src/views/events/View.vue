@@ -6,6 +6,7 @@ import useHttp from '@/compose/http'
 import { useAuthStore } from '@/stores/auth'
 import AttendeesList from './Partials/AttendeesList.vue'
 import { useRouter } from 'vue-router'
+import EventActions from './Partials/EventActions.vue'
 
 const props = defineProps<{
 	eventId?: number | string
@@ -33,6 +34,7 @@ const load = () => {
 		},
 	})
 }
+
 onMounted(load)
 </script>
 
@@ -157,50 +159,20 @@ onMounted(load)
 					</div>
 				</div>
 				<div class="w-72 flex flex-col gap-3">
-					<button class="btn-primary w-full">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="size-5"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
-							/>
-						</svg>
-
-						Attend
-					</button>
-					<button class="btn-secondary w-full">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="size-5"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
-							/>
-						</svg>
-
-						Save
-					</button>
+					<EventActions
+						v-if="event"
+						:event="event"
+						@attend="event.userIsAttendee = true"
+						@leave="event.userIsAttendee = false"
+					/>
 				</div>
 			</div>
 			<div class="border-b flex items-center text-sm text-gray-500 font-medium">
 				<div
 					role="button"
 					@click="tab = 'attendees'"
-					:class="{ 'text-primary  border-primary': tab == 'attendees' }"
-					class="p-3 flex items-center border-b-2 border-transparent gap-2"
+					:class="{ 'text-primary  border-b-primary': tab == 'attendees' }"
+					class="p-3 flex items-center border-b-2 transition-all border-transparent gap-2"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -221,8 +193,8 @@ onMounted(load)
 				<div
 					role="button"
 					@click="tab = 'comments'"
-					:class="{ 'text-primary  border-primary': tab == 'comments' }"
-					class="p-3 flex items-center border-b-2 border-transparent gap-2"
+					:class="{ 'text-primary  border-b-primary': tab == 'comments' }"
+					class="p-3 flex items-center border-b-2 transition-all border-transparent gap-2"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -248,19 +220,3 @@ onMounted(load)
 		</template>
 	</Layout>
 </template>
-<style>
-.loader {
-	width: 50px;
-	aspect-ratio: 1;
-	border-radius: 50%;
-	background: radial-gradient(farthest-side, #264653 94%, #0000) top/8px 8px no-repeat,
-		conic-gradient(#0000 30%, #264653);
-	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
-	animation: l13 1s infinite linear;
-}
-@keyframes l13 {
-	100% {
-		transform: rotate(1turn);
-	}
-}
-</style>
