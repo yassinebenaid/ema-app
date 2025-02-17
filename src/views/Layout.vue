@@ -81,7 +81,7 @@ const logout = () => {
 				</li>
 				<li>
 					<RouterLink
-						:to="{ name: 'login' }"
+						:to="{ name: 'calendar' }"
 						class="flex active:bg-stone-200 hover:bg-stone-200/50 items-center gap-2 p-2 rounded-lg"
 					>
 						<svg
