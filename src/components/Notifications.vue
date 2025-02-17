@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const isModalOpen = ref(true)
+const isModalOpen = ref(false)
 </script>
 
 <template>

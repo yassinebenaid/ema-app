@@ -73,7 +73,7 @@ watch(lazyLoadingElementIsVisible, () => {
 			</template>
 		</div>
 		<div
-			v-if="page != pagination?.lastPage"
+			v-if="page != pagination?.lastPage && pagination?.totalItems > 18"
 			ref="lazyLoadingElement"
 			class="grid pt-2 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2"
 		>

@@ -6,8 +6,10 @@ const instance = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
 	headers: {
 		Accept: 'application/json',
+		'Accept-Language': 'en',
 	},
 })
+
 export default function useHttp(config: AxiosRequestConfig): Promise<AxiosResponse>
 export default function useHttp(): {
 	loading: Ref<boolean>
@@ -33,8 +35,6 @@ export default function useHttp(config?: AxiosRequestConfig) {
 		onError?: (res: AxiosResponse) => void
 	}) => {
 		loading.value = true
-
-		options.config.headers!['Accept-Language'] = 'en'
 
 		instance(options.config)
 			.then(res => {
