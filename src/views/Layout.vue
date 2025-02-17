@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Notifications from '@/components/Notifications.vue'
 import PathBar from '@/components/PathBar.vue'
 
 import { useAuthStore } from '@/stores/auth'
@@ -145,8 +146,9 @@ const logout = () => {
 		</aside>
 
 		<main ref="container" class="w-full flex gap-3 flex-col p-3 overflow-x-hidden overflow-y-auto relative">
-			<header class="stick top-0">
+			<header class="stick top-0 flex items-center justify-between">
 				<PathBar :segments="['Events']" />
+				<Notifications />
 			</header>
 
 			<div class="flex-1">

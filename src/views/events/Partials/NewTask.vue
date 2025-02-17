@@ -259,6 +259,21 @@ const save = () => {
 	</div>
 </template>
 <style>
+.dp__theme_light {
+	--dp-primary-color: #264653;
+	--dp-primary-disabled-color: #26465388;
+	--dp-range-between-dates-background-color: #2646531f;
+	--dp-text-color: #264653;
+	--dp-border-color-hover: rgb(38 70 83 / 0.5);
+}
+
+:root {
+	--dp-input-padding: 0.625rem;
+	--dp-action-buttons-padding: 1.1rem 3rem;
+}
+</style>
+
+<style scoped>
 .blur-enter-active,
 .blur-leave-active,
 .modal-enter-active,
@@ -277,18 +292,5 @@ const save = () => {
 .modal-leave-to {
 	translate: 0 -5%;
 	opacity: 0;
-}
-
-.dp__theme_light {
-	--dp-primary-color: #264653;
-	--dp-primary-disabled-color: #26465388;
-	--dp-range-between-dates-background-color: #2646531f;
-	--dp-text-color: #264653;
-	--dp-border-color-hover: rgb(38 70 83 / 0.5);
-}
-
-:root {
-	--dp-input-padding: 0.625rem;
-	--dp-action-buttons-padding: 1.1rem 3rem;
 }
 </style>
