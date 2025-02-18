@@ -2,9 +2,8 @@
 import useHttp from '@/compose/http'
 import { useAuthStore } from '@/stores/auth'
 import type { Notification, Pagination } from '@/types/general'
-import { useElementVisibility } from '@vueuse/core'
 import moment from 'moment'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const isModalOpen = ref(false)
 
@@ -24,7 +23,7 @@ const loadNotifications = () => {
 				Authorization: `Bearer ${useAuthStore().token}`,
 			},
 			params: {
-				per_page: 18,
+				per_page: 3,
 				page: page,
 			},
 		},
@@ -37,16 +36,13 @@ const loadNotifications = () => {
 
 onMounted(loadNotifications)
 
-const lazyLoadingElement = ref<HTMLDivElement>()
-const lazyLoadingElementIsVisible = useElementVisibility(lazyLoadingElement)
-
-watch(lazyLoadingElementIsVisible, () => {
+const loadMore = () => {
 	if (page == pagination.value?.lastPage) {
 		return
 	}
 	page++
 	loadNotifications()
-})
+}
 
 const markNotificationAsRead = (id: string) => {
 	isModalOpen.value = false
@@ -99,6 +95,7 @@ const markNotificationAsRead = (id: string) => {
 			<div>
 				<Transition name="blur">
 					<div
+						@click="isModalOpen = false"
 						v-if="isModalOpen"
 						class="bg-stone-900/20 z-10 shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px] backdrop-blur-[0.8px] w-screen h-screen fixed top-0 left-0"
 					></div>
@@ -124,7 +121,7 @@ const markNotificationAsRead = (id: string) => {
 								</svg>
 							</button>
 						</div>
-						<div class="flex-1 p-2">
+						<div class="flex-1 p-2 max-h-full overflow-x-hidden overflow-y-scroll pb-[10rem]">
 							<RouterLink
 								v-for="notification in notifications"
 								:key="notification.id"
@@ -150,6 +147,19 @@ const markNotificationAsRead = (id: string) => {
 									</div>
 								</div>
 							</RouterLink>
+
+							<div v-if="loading" class="grid place-content-center">
+								<div class="loader"></div>
+							</div>
+							<div v-else class="grid place-items-center w-full pt-10">
+								<button
+									v-if="page != pagination?.lastPage"
+									@click="loadMore"
+									class="btn-primary !px-2 !text-xs"
+								>
+									Load More
+								</button>
+							</div>
 						</div>
 					</div>
 				</Transition>
@@ -176,5 +186,15 @@ const markNotificationAsRead = (id: string) => {
 .modal-leave-to {
 	transform: translateX(100%);
 	opacity: 0;
+}
+
+.loader {
+	width: 30px;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: radial-gradient(farthest-side, #2646538d 94%, #0000) top/8px 8px no-repeat,
+		conic-gradient(#0000 30%, #2646538d);
+	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+	animation: l13 1s infinite linear;
 }
 </style>
