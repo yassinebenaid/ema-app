@@ -9,13 +9,13 @@ import { computed, onMounted, ref, watch } from 'vue'
 const isModalOpen = ref(false)
 
 const notifications = ref<Notification[]>([])
-const hasUnreadNotifications = computed(() => notifications.value.filter(n => n.readAt == null))
+const hasUnreadNotifications = computed(() => notifications.value.filter(n => n.readAt == null).length)
 const pagination = ref<Pagination>()
 let page = 1
 
 const { execute, loading } = useHttp()
 
-const load = () => {
+const loadNotifications = () => {
 	execute({
 		config: {
 			url: 'notifications',
@@ -35,7 +35,7 @@ const load = () => {
 	})
 }
 
-onMounted(load)
+onMounted(loadNotifications)
 
 const lazyLoadingElement = ref<HTMLDivElement>()
 const lazyLoadingElementIsVisible = useElementVisibility(lazyLoadingElement)
@@ -45,8 +45,31 @@ watch(lazyLoadingElementIsVisible, () => {
 		return
 	}
 	page++
-	load()
+	loadNotifications()
 })
+
+const markNotificationAsRead = (id: string) => {
+	isModalOpen.value = false
+	execute({
+		config: {
+			method: 'post',
+			url: `notifications/read`,
+			data: {
+				notificationId: id,
+			},
+			headers: {
+				Authorization: `Bearer ${useAuthStore().token}`,
+			},
+		},
+		onSuccess() {
+			notifications.value.forEach(e => {
+				if (e.id == id) {
+					e.readAt = 'now'
+				}
+			})
+		},
+	})
+}
 </script>
 
 <template>
@@ -69,7 +92,7 @@ watch(lazyLoadingElementIsVisible, () => {
 					d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
 				/>
 			</svg>
-			<div class="absolute bg-red-700 rounded-full top-1 left-2 p-1"></div>
+			<div v-if="hasUnreadNotifications" class="absolute bg-red-700 rounded-full top-1 left-2 p-1"></div>
 		</button>
 
 		<Teleport to="body">
@@ -103,16 +126,16 @@ watch(lazyLoadingElementIsVisible, () => {
 						</div>
 						<div class="flex-1 p-2">
 							<RouterLink
+								v-for="notification in notifications"
+								:key="notification.id"
+								@click="markNotificationAsRead(notification.id)"
 								:to="{
 									name: 'events.view',
 									params: { eventId: notification.data.event.id },
-									query: { srcn: notification.id },
 								}"
-								v-for="notification in notifications"
-								:key="notification.id"
-								:class="{ 'font-medium': !notification.readAt }"
 							>
 								<div
+									:class="{ 'font-medium  bg-yellow-50/50': !notification.readAt }"
 									class="text-sm border-b hover:bg-gray-100 active:bg-gray-50 transition-all p-3 text-gray-500"
 								>
 									<div>

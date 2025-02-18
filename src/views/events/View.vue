@@ -46,7 +46,7 @@ onMounted(load)
 		</div>
 		<template v-else>
 			<div class="flex">
-				<div>
+				<div class="flex-1">
 					<div class="flex items-center justify-between">
 						<h1 class="text-2xl font-bold">{{ event?.title }}</h1>
 					</div>
