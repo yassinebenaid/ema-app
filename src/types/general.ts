@@ -1,3 +1,7 @@
+import type { AxiosStatic } from 'axios'
+import type Echo from 'laravel-echo'
+import type Pusher from 'pusher-js'
+
 export interface Pagination {
 	currentPage: number
 	lastPage: number
@@ -17,4 +21,13 @@ export interface Notification {
 		}
 		time: string
 	}
+}
+
+declare global {
+	interface Window {
+		axios: AxiosStatic
+	}
+
+	var Pusher: typeof Pusher
+	var Echo: Echo<any>
 }

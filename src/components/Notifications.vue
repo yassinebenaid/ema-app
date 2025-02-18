@@ -34,7 +34,14 @@ const loadNotifications = () => {
 	})
 }
 
-onMounted(loadNotifications)
+onMounted(() => {
+	loadNotifications()
+
+	const user = useAuthStore().user
+	Echo.private('App.Models.User.' + user?.id).notification(notification => {
+		console.log(notification.type)
+	})
+})
 
 const loadMore = () => {
 	if (page == pagination.value?.lastPage) {

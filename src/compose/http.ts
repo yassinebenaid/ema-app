@@ -1,14 +1,13 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
-import axios from 'axios'
 import { ref, type Ref } from 'vue'
 
-const instance = axios.create({
-	baseURL: import.meta.env.VITE_API_URL,
-	headers: {
-		Accept: 'application/json',
-		'Accept-Language': 'en',
-	},
-})
+// const instance = axios.create({
+// 	baseURL: import.meta.env.VITE_API_URL,
+// 	headers: {
+// 		Accept: 'application/json',
+// 		'Accept-Language': 'en',
+// 	},
+// })
 
 export default function useHttp(config: AxiosRequestConfig): Promise<AxiosResponse>
 export default function useHttp(): {
@@ -23,7 +22,7 @@ export default function useHttp(): {
 
 export default function useHttp(config?: AxiosRequestConfig) {
 	if (config) {
-		return instance(config)
+		return window.axios(config)
 	}
 
 	const loading = ref(false)
@@ -36,7 +35,8 @@ export default function useHttp(config?: AxiosRequestConfig) {
 	}) => {
 		loading.value = true
 
-		instance(options.config)
+		window
+			.axios(options.config)
 			.then(res => {
 				if (options.onSuccess && res.data.success) {
 					options.onSuccess(res.data)
