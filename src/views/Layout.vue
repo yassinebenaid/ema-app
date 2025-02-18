@@ -180,3 +180,8 @@ const logout = () => {
 		</main>
 	</div>
 </template>
+<style scoped>
+.router-link-active {
+	@apply bg-stone-200/50 text-primary;
+}
+</style>

@@ -22,10 +22,6 @@
 	@apply py-2 px-4 flex items-center gap-2 justify-center text-sm text-center border-2 border-transparent text-primary font-medium bg-primary/10 duration-150 hover:bg-primary/20 active:bg-primary/30 rounded-lg;
 }
 
-.router-link-active {
-	@apply bg-stone-200/50 text-primary;
-}
-
 input[type='number'] {
 	-moz-appearance: textfield; /* Firefox */
 	appearance: textfield; /* Chrome, Safari, Edge */
