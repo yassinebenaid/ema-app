@@ -15,20 +15,7 @@ import Layout from './Layout.vue'
 const calendarApp = createCalendar({
 	selectedDate: '2023-12-19',
 	views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
-	events: [
-		{
-			id: 1,
-			title: 'Event 1',
-			start: '2023-12-19',
-			end: '2023-12-19',
-		},
-		{
-			id: 2,
-			title: 'Event 2',
-			start: '2023-12-20 12:00',
-			end: '2023-12-20 13:00',
-		},
-	],
+	events: [],
 })
 </script>
 
