@@ -14,4 +14,6 @@ window.axios = <any>axios.create({
 	},
 })
 
+window.NotificationAlert = new Audio('/notification.wav')
+
 createApp(App).use(createPinia()).use(router).mount('#app')

@@ -28,6 +28,7 @@ declare global {
 		axios: AxiosStatic
 	}
 
+	var NotificationAlert: HTMLAudioElement
 	var Pusher: typeof Pusher
 	var Echo: Echo<any>
 }
