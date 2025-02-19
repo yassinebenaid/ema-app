@@ -36,6 +36,8 @@ const load = () => {
 	})
 }
 
+const user = useAuthStore().user
+
 onMounted(load)
 </script>
 
@@ -155,9 +157,8 @@ onMounted(load)
 						</div>
 					</div>
 				</div>
-				<div class="w-72 flex flex-col gap-3">
+				<div v-if="event && event.user.id != user?.id" class="w-72 flex flex-col gap-3">
 					<EventActions
-						v-if="event"
 						:event="event"
 						@attend="event.userIsAttendee = true"
 						@leave="event.userIsAttendee = false"

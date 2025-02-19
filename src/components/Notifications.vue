@@ -43,8 +43,6 @@ onMounted(() => {
 		.private('App.Models.User.' + user?.id)
 		.notification((notification: Notification) => {
 			window.NotificationAlert.play()
-			console.log(notifications.value[0])
-			console.log(notification)
 			notifications.value.unshift(notification)
 		})
 })
