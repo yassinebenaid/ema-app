@@ -1,14 +1,6 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ref, type Ref } from 'vue'
 
-// const instance = axios.create({
-// 	baseURL: import.meta.env.VITE_API_URL,
-// 	headers: {
-// 		Accept: 'application/json',
-// 		'Accept-Language': 'en',
-// 	},
-// })
-
 export default function useHttp(config: AxiosRequestConfig): Promise<AxiosResponse>
 export default function useHttp(): {
 	loading: Ref<boolean>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useHttp from '@/compose/http'
+import useEcho from '@/compose/ws'
 import { useAuthStore } from '@/stores/auth'
 import type { Notification, Pagination } from '@/types/general'
 import moment from 'moment'
@@ -38,9 +39,11 @@ onMounted(() => {
 	loadNotifications()
 
 	const user = useAuthStore().user
-	Echo.private('App.Models.User.' + user?.id).notification(notification => {
-		console.log(notification.type)
-	})
+	useEcho()
+		.private('App.Models.User.' + user?.id)
+		.notification((notification: Notification) => {
+			notifications.value.unshift(notification)
+		})
 })
 
 const loadMore = () => {
