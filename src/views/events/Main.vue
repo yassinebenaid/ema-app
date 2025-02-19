@@ -10,6 +10,7 @@ import Filters from './Partials/Filters.vue'
 import { useElementVisibility } from '@vueuse/core'
 import type { Pagination } from '@/types/general'
 import NewTask from './Partials/NewTask.vue'
+import Empty from '@/components/Empty.vue'
 
 const events = ref<Event[]>([])
 const pagination = ref<Pagination>()
@@ -68,12 +69,15 @@ watch(lazyLoadingElementIsVisible, () => {
 			<template v-if="loading && !events.length">
 				<EventCardLoading v-for="i in 9" :key="i" />
 			</template>
-			<template v-else>
+			<template v-else-if="events.length">
 				<EventCard v-for="event in events" :key="event.id" :event="event" />
 			</template>
+			<div v-else class="col-span-3">
+				<Empty />
+			</div>
 		</div>
 		<div
-			v-if="page != pagination?.lastPage && pagination?.totalItems > 18"
+			v-if="page != pagination?.lastPage && pagination?.totalItems! > 18"
 			ref="lazyLoadingElement"
 			class="grid pt-2 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2"
 		>
