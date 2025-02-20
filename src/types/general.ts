@@ -1,6 +1,5 @@
 import type { AxiosStatic } from 'axios'
 import type Echo from 'laravel-echo'
-import type Pusher from 'pusher-js'
 
 export interface Pagination {
 	currentPage: number
@@ -28,7 +27,7 @@ declare global {
 		axios: AxiosStatic
 	}
 
+	var Pusher: any
 	var NotificationAlert: HTMLAudioElement
-	var Pusher: typeof Pusher
 	var Echo: Echo<any>
 }

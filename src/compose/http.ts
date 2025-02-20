@@ -18,7 +18,7 @@ export default function useHttp(config?: AxiosRequestConfig) {
 	}
 
 	const loading = ref(false)
-	const errors = ref([])
+	const errors = ref<string[]>([])
 
 	const execute = (options: {
 		config: AxiosRequestConfig

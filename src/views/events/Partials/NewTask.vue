@@ -4,7 +4,7 @@ import { useAuthStore } from '@/stores/auth'
 import type { Event } from '@/types/event'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import moment from 'moment'
-import { ref, toValue, watch } from 'vue'
+import { ref, toValue } from 'vue'
 
 const emit = defineEmits<{
 	(e: 'create', value: Event): void

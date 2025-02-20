@@ -1,3 +1,26 @@
+<script lang="ts">
+import { ref } from 'vue'
+export default {
+	data: function () {
+		return {
+			isOpen: false,
+		}
+	},
+	methods: {
+		toggleMenu() {
+			this.isOpen = !this.isOpen
+		},
+	},
+	setup() {
+		let open = ref(false)
+		function menuOpen() {
+			open.value = !open.value
+		}
+		return { open, menuOpen }
+	},
+}
+</script>
+
 <template>
 	<nav class="relative items-center pt-5 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6">
 		<div class="flex justify-between">
@@ -164,26 +187,3 @@
 		</footer>
 	</div>
 </template>
-
-<script>
-import { ref } from 'vue'
-export default {
-	data: function () {
-		return {
-			isOpen: false,
-		}
-	},
-	methods: {
-		toggleMenu() {
-			this.isOpen = !this.isOpen
-		},
-	},
-	setup() {
-		let open = ref(false)
-		function menuOpen() {
-			open.value = !open.value
-		}
-		return { open, menuOpen }
-	},
-}
-</script>
